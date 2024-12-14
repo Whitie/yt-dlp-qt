@@ -5,7 +5,7 @@ description = "Qt frontend for yt-dlp."
 authors = ["Whitie <whitie@posteo.eu>"]
 license = "MIT"
 readme = "README.md"
-homepage = ""
+homepage = "https://dev.whitie.de/Thorsten/yt-dlp-qt"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.14"
