@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "yt-dlp-qt"
+version = "0.1"
+description = "Qt frontend for yt-dlp."
+authors = ["Whitie <whitie@posteo.eu>"]
+license = "MIT"
+readme = "README.md"
+homepage = ""
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.14"
+yt-dlp = "^2024.12.6"
+pyside6 = "^6.8.1"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.1.1"
+black = "^24.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+yt-dlp-qt = "yt_dlp_qt.main:main"
+
+[tool.poetry.urls]
+"Icon von AmruID" = "https://de.freepik.com/icon/spielen_10885035"
