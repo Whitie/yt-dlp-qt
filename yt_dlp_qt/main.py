@@ -1,3 +1,4 @@
+import gettext
 import json
 import sys
 
@@ -14,10 +15,22 @@ from PySide6.QtUiTools import QUiLoader
 _PATH = Path(__file__).resolve().parent
 ICON = _PATH / "icons" / "yt-dlp-qt.png"
 UI_FILE = _PATH / "app.ui"
+LOCALES = _PATH / "locales"
 AUDIO_CODECS = ("aac", "vorbis", "mp3", "opus", "wav")
 AUDIO_QUALITIES = (0, 2, 5, 8)
 VIDEO_CONTAINERS = ("mp4", "mkv", "3gp", "flv", "webm")
 VIDEO_RESOLUTIONS = (2160, 1440, 1080, 720, 480)
+
+
+try:
+    translation = gettext.translation("yt-dlp-qt", localedir=LOCALES)
+    if translation:
+        translation.install()
+        _ = translation.gettext
+        ngt = translation.ngettext
+except FileNotFoundError:
+    _ = gettext.gettext
+    ngt = gettext.ngettext
 
 
 class UiLoaderError(Exception):
@@ -42,7 +55,9 @@ class UiLoader(QUiLoader):
                     widget = self.custom_widgets[class_name](parent)
                 except (TypeError, KeyError):
                     raise UiLoaderError(
-                        f'No custom widget "{class_name}" found.'
+                        _('No custom widget "{class_name}" found.').format(
+                            class_name=class_name
+                        )
                     )
             if self.base:
                 setattr(self.base, name, widget)
@@ -92,7 +107,7 @@ class Worker(QtCore.QThread):
         options["progress_hooks"] = [self._progress]
         with yt_dlp.YoutubeDL(options) as ydl:
             info = ydl.extract_info(url, download=False)
-            title = info.get("title", "unknown title")
+            title = info.get("title", _("unknown title"))
             self.started.emit(title)
             ydl.download([url])
         self.finished.emit(title)
@@ -108,6 +123,14 @@ class YtDlpQt(QtWidgets.QMainWindow):
         self.tray = None
         self.last_url = ""
         self.apply_config()
+        self.filemenu = QtWidgets.QMenu(_("&File"))
+        self.action_quit = QtGui.QAction(_("&Quit"))
+        self.filemenu.addAction(self.action_quit)
+        self.menubar.addMenu(self.filemenu)
+        self.helpmenu = QtWidgets.QMenu(_("&Help"))
+        self.action_help = QtGui.QAction(_("&About"))
+        self.helpmenu.addAction(self.action_help)
+        self.menubar.addMenu(self.helpmenu)
         self.status = self.statusBar()
         self.clipboard = QtWidgets.QApplication.clipboard()
         self.clipboard.dataChanged.connect(self.check_clipboard)
@@ -115,6 +138,7 @@ class YtDlpQt(QtWidgets.QMainWindow):
         self.browse.clicked.connect(self.set_download_location)
         self.download.clicked.connect(self.start_download)
         self.audio_only.stateChanged.connect(self._only_audio)
+        self.url.textChanged.connect(self._check_url)
         self.queue = Queue()
         self.shutdown = Event()
         self.worker = Worker(self.queue, self.shutdown)
@@ -123,6 +147,9 @@ class YtDlpQt(QtWidgets.QMainWindow):
         self.worker.progress.connect(self.download_progress)
         self.worker.start()
         self._only_audio()
+        self._check_url()
+        self._translate()
+        self.tabs.setCurrentIndex(0)
 
     def _quit(self):
         self.dump_config()
@@ -133,9 +160,31 @@ class YtDlpQt(QtWidgets.QMainWindow):
         app = QtWidgets.QApplication.instance()
         app.quit()
 
+    def _translate(self):
+        self.url.setPlaceholderText(_("Paste URL to download here"))
+        self.tabs.setTabText(0, _("Format"))
+        self.tabs.setTabText(1, _("Settings"))
+        self.group_video.setTitle(_("Video"))
+        self.group_audio.setTitle(_("Audio"))
+        self.lbl_resolution.setText(_("Max. Resolution"))
+        self.lbl_video_format.setText(_("Preferred Format"))
+        self.audio_only.setText(_("Audio Only"))
+        self.lbl_quality.setText(_("Quality"))
+        self.lbl_audio_format.setText(_("Format"))
+        self.browse.setText(_("Browse"))
+        self.download.setText(_("Download"))
+        self.monitor_clipboard.setText(
+            _("Get URL from clipboard (experimental)")
+        )
+        self.lbl_output_name.setText(_("Output Name"))
+        self.lbl_own_format.setText(_("Format"))
+
     def _only_audio(self, state: int | None = None):
         self.video_resolution.setDisabled(self.audio_only.isChecked())
         self.video_format.setDisabled(self.audio_only.isChecked())
+
+    def _check_url(self, text: str = ""):
+        self.download.setEnabled(bool(text.strip()))
 
     def check_clipboard(self):
         if self.monitor_clipboard.isChecked():
@@ -147,7 +196,7 @@ class YtDlpQt(QtWidgets.QMainWindow):
     def set_download_location(self):
         folder = QtWidgets.QFileDialog.getExistingDirectory(
             self,
-            "Choose location",
+            _("Choose location"),
             self.output_path.text(),
             QtWidgets.QFileDialog.ShowDirsOnly,
         )
@@ -161,13 +210,19 @@ class YtDlpQt(QtWidgets.QMainWindow):
         self.queue.put((url, self.get_ytdlp_options()))
 
     def download_started(self, title: str):
-        self.tray.showMessage("YT-DLP-QT", f"Downloading {title}")
-        self.status.showMessage(f"Downloading: {title}")
+        self.tray.showMessage(
+            "YT-DLP-QT", _("Downloading {title}").format(title=title)
+        )
+        self.status.showMessage(_("Downloading: {title}").format(title=title))
         self.progress.setValue(1)
 
     def download_finished(self, title: str):
-        self.tray.showMessage("YT-DLP-QT", f"Download finished: {title}")
-        self.status.showMessage(f"Finished: {title}", 5000)
+        self.tray.showMessage(
+            "YT-DLP-QT", _("Download finished: {title}").format(title=title)
+        )
+        self.status.showMessage(
+            _("Finished: {title}").format(title=title), 5000
+        )
 
     def download_progress(self, progress: int):
         self.progress.setValue(progress)
@@ -292,10 +347,10 @@ def main():
         tray = QtWidgets.QSystemTrayIcon(icon)
         tray.setVisible(True)
         menu = QtWidgets.QMenu()
-        action_show = QtGui.QAction("Show Window")
+        action_show = QtGui.QAction(_("Show Window"))
         action_show.triggered.connect(window.show)
         menu.addAction(action_show)
-        action_quit = QtGui.QAction("Quit")
+        action_quit = QtGui.QAction(_("Quit"))
         action_quit.triggered.connect(window._quit)
         menu.addAction(action_quit)
         tray.setContextMenu(menu)

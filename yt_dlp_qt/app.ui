@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>436</width>
-    <height>434</height>
+    <height>453</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,7 +47,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QGroupBox" name="groupBox">
+         <widget class="QGroupBox" name="group_video">
           <property name="title">
            <string>Video</string>
           </property>
@@ -55,7 +55,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="lbl_resolution">
                <property name="text">
                 <string>Max. Resolution</string>
                </property>
@@ -111,7 +111,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
-              <widget class="QLabel" name="label_3">
+              <widget class="QLabel" name="lbl_video_format">
                <property name="text">
                 <string>Preferred Format</string>
                </property>
@@ -165,7 +165,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox_2">
+         <widget class="QGroupBox" name="group_audio">
           <property name="title">
            <string>Audio</string>
           </property>
@@ -183,7 +183,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
-              <widget class="QLabel" name="label_4">
+              <widget class="QLabel" name="lbl_quality">
                <property name="text">
                 <string>Quality</string>
                </property>
@@ -231,7 +231,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
              <item>
-              <widget class="QLabel" name="label_5">
+              <widget class="QLabel" name="lbl_audio_format">
                <property name="text">
                 <string>Format</string>
                </property>
@@ -311,7 +311,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="lbl_output_name">
             <property name="text">
              <string>Output Name</string>
             </property>
@@ -332,7 +332,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="lbl_own_format">
             <property name="text">
              <string>Format</string>
             </property>
@@ -405,20 +405,6 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>&amp;File</string>
-    </property>
-    <addaction name="action_quit"/>
-   </widget>
-   <widget class="QMenu" name="menu_Help">
-    <property name="title">
-     <string>&amp;Help</string>
-    </property>
-    <addaction name="action_about"/>
-   </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_quit">
