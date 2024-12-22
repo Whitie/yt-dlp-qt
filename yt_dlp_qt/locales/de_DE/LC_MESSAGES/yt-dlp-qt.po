@@ -12,9 +12,9 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: main.py:37
@@ -27,6 +27,13 @@ msgid ""
 "<b>Icon by AmruID</b>:\n"
 "<a href=\"https://de.freepik.com/icon/spielen_10885035\">Freepik</a><br>\n"
 msgstr ""
+"<b>Simple GUI für yt-dlp</b><br>\n"
+"<br>\n"
+"Es sind nur einige Optionen von yt-dlp verfügbar.<br>\n"
+"<br>\n"
+"<b>URL</b>: <a href=\"https://github.com/whitie/yt-dlp-qt\">Github</a><br>\n"
+"<b>Icon von AmruID</b>:\n"
+"<a href=\"https://de.freepik.com/icon/spielen_10885035\">Freepik</a><br>\n"
 
 #: main.py:71
 #, python-brace-format
@@ -35,23 +42,23 @@ msgstr ""
 
 #: main.py:123
 msgid "unknown title"
-msgstr ""
+msgstr "Unbekannter Titel"
 
 #: main.py:139
 msgid "&File"
-msgstr ""
+msgstr "&Datei"
 
 #: main.py:140
 msgid "&Quit"
-msgstr ""
+msgstr "&Beenden"
 
 #: main.py:143
 msgid "&Help"
-msgstr ""
+msgstr "&Hilfe"
 
 #: main.py:144
 msgid "&About"
-msgstr ""
+msgstr "Ü&ber"
 
 #: main.py:178
 msgid "About YT-DLP-QT"
@@ -59,7 +66,7 @@ msgstr ""
 
 #: main.py:181
 msgid "Paste URL to download here"
-msgstr ""
+msgstr "URL zum Herunterladen hier einfügen"
 
 #: main.py:182 main.py:190 main.py:197
 msgid "Format"
@@ -67,7 +74,7 @@ msgstr ""
 
 #: main.py:183
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: main.py:184
 msgid "Video"
@@ -79,23 +86,23 @@ msgstr ""
 
 #: main.py:186
 msgid "Max. Resolution"
-msgstr ""
+msgstr "Max. Auflösung"
 
 #: main.py:187
 msgid "Preferred Format"
-msgstr ""
+msgstr "Bevorzugtes Format"
 
 #: main.py:188
 msgid "Audio Only"
-msgstr ""
+msgstr "Nur Audio"
 
 #: main.py:189
 msgid "Quality"
-msgstr ""
+msgstr "Qualität"
 
 #: main.py:191
 msgid "Browse"
-msgstr ""
+msgstr "Durchsuchen"
 
 #: main.py:192
 msgid "Download"
@@ -103,65 +110,69 @@ msgstr ""
 
 #: main.py:194
 msgid "Get URL from clipboard (experimental)"
-msgstr ""
+msgstr "Zwischenablage auf URL's überwachen (experimentell)"
 
 #: main.py:196
 msgid "Output Name"
-msgstr ""
+msgstr "Ausgabename"
 
 #: main.py:199
 msgid "Download only audio in the given format and quality."
-msgstr ""
+msgstr "Nur Audio im eingestellten Format herunterladen."
 
 #: main.py:203
 msgid ""
 "If checked, monitor clipboard for URL's and copy them to the URL input field."
-msgstr ""
+msgstr "Wenn aktiviert, wird die Zwischenablage auf URL's überwacht."
 
 #: main.py:209
 msgid "Will be appended to output directory. A leading slash is removed."
 msgstr ""
+"Wird an das Ausgabeverzeichnis angehängt. Führende Schrägstriche werden "
+"entfernt."
 
 #: main.py:215
 msgid "Use at your own risk. All settings from the format tab will be ignored."
 msgstr ""
+"Benutzung auf eigenes Risiko. Alle Einstellungen unter Format werden "
+"ignoriert."
 
 #: main.py:219
 msgid "Choose output directory."
-msgstr ""
+msgstr "Ausgabeverzeichnis wählen."
 
 #: main.py:220
 msgid "Start downloading now..."
-msgstr ""
+msgstr "Starte den Download jetzt..."
 
 #: main.py:239
 msgid "Choose location"
-msgstr ""
+msgstr "Verzeichnis wählen"
 
 #: main.py:254
 #, python-brace-format
 msgid "Downloading {title}"
-msgstr ""
+msgstr "Lade {title}"
 
 #: main.py:256
 #, python-brace-format
 msgid "Downloading: {title}"
-msgstr ""
+msgstr "Lade: {title}"
 
 #: main.py:261
 #, python-brace-format
 msgid "Download finished: {title}"
-msgstr ""
+msgstr "Download beendet: {title}"
 
 #: main.py:264
 #, python-brace-format
 msgid "Finished: {title}"
-msgstr ""
+msgstr "Beendet: {title}"
 
 #: main.py:390
 msgid "Show Window"
-msgstr ""
+msgstr "Fenster anzeigen"
 
 #: main.py:393
 msgid "Quit"
-msgstr ""
+msgstr "Beenden"

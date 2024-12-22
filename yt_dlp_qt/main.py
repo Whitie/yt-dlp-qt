@@ -33,6 +33,19 @@ except FileNotFoundError:
     ngt = gettext.ngettext
 
 
+ABOUT = _(
+    """\
+<b>GUI-Frontend for yt-dlp</b><br>
+<br>
+Only some of yt-dlp's options are available.<br>
+<br>
+<b>URL</b>: <a href="https://github.com/whitie/yt-dlp-qt">Github</a><br>
+<b>Icon by AmruID</b>:
+<a href="https://de.freepik.com/icon/spielen_10885035">Freepik</a><br>
+"""
+)
+
+
 class UiLoaderError(Exception):
     pass
 
@@ -135,6 +148,7 @@ class YtDlpQt(QtWidgets.QMainWindow):
         self.clipboard = QtWidgets.QApplication.clipboard()
         self.clipboard.dataChanged.connect(self.check_clipboard)
         self.action_quit.triggered.connect(self._quit)
+        self.action_help.triggered.connect(self._help)
         self.browse.clicked.connect(self.set_download_location)
         self.download.clicked.connect(self.start_download)
         self.audio_only.stateChanged.connect(self._only_audio)
@@ -160,6 +174,9 @@ class YtDlpQt(QtWidgets.QMainWindow):
         app = QtWidgets.QApplication.instance()
         app.quit()
 
+    def _help(self):
+        QtWidgets.QMessageBox.about(self, _("About YT-DLP-QT"), _(ABOUT))
+
     def _translate(self):
         self.url.setPlaceholderText(_("Paste URL to download here"))
         self.tabs.setTabText(0, _("Format"))
@@ -178,6 +195,29 @@ class YtDlpQt(QtWidgets.QMainWindow):
         )
         self.lbl_output_name.setText(_("Output Name"))
         self.lbl_own_format.setText(_("Format"))
+        self.audio_only.setToolTip(
+            _("Download only audio in the given format and quality.")
+        )
+        self.monitor_clipboard.setToolTip(
+            _(
+                "If checked, monitor clipboard for URL's and copy them to the "
+                "URL input field."
+            )
+        )
+        self.output_name.setToolTip(
+            _(
+                "Will be appended to output directory. "
+                "A leading slash is removed."
+            )
+        )
+        self.own_format.setToolTip(
+            _(
+                "Use at your own risk. All settings from the format tab "
+                "will be ignored."
+            )
+        )
+        self.browse.setToolTip(_("Choose output directory."))
+        self.download.setToolTip(_("Start downloading now..."))
 
     def _only_audio(self, state: int | None = None):
         self.video_resolution.setDisabled(self.audio_only.isChecked())

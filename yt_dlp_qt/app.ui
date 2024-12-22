@@ -39,7 +39,7 @@
     <item>
      <widget class="QTabWidget" name="tabs">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_format">
        <attribute name="title">
@@ -172,9 +172,6 @@
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <widget class="QCheckBox" name="audio_only">
-             <property name="toolTip">
-              <string>Download only audio in the given quality and format.</string>
-             </property>
              <property name="text">
               <string>Audio Only</string>
              </property>
@@ -300,9 +297,6 @@
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <widget class="QCheckBox" name="monitor_clipboard">
-          <property name="toolTip">
-           <string>If checked, the application will look into the clipboard and copy contents to the URL input.</string>
-          </property>
           <property name="text">
            <string>Get URL from clipboard (experimental)</string>
           </property>
@@ -319,9 +313,6 @@
           </item>
           <item>
            <widget class="QLineEdit" name="output_name">
-            <property name="toolTip">
-             <string>This will be appended to the output path. A leading slash is removed.</string>
-            </property>
             <property name="text">
              <string>%(title)s.%(ext)s</string>
             </property>
@@ -340,9 +331,6 @@
           </item>
           <item>
            <widget class="QLineEdit" name="own_format">
-            <property name="toolTip">
-             <string>Use this at your own risk. All settings from the Format tab will be ignored.</string>
-            </property>
             <property name="clearButtonEnabled">
              <bool>true</bool>
             </property>
@@ -371,9 +359,6 @@
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QPushButton" name="browse">
-        <property name="toolTip">
-         <string>Set output directory.</string>
-        </property>
         <property name="text">
          <string>Browse</string>
         </property>
@@ -384,9 +369,6 @@
       </item>
       <item>
        <widget class="QPushButton" name="download">
-        <property name="toolTip">
-         <string>Start downloading now...</string>
-        </property>
         <property name="text">
          <string>Download</string>
         </property>
